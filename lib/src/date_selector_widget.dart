@@ -458,22 +458,25 @@ class _DateScrollerState extends State<DateScroller> {
           child: Center(child: Text(dayNumber, style: textStyle)),
         );
       case DateSelectedShape.circle:
-      case DateSelectedShape.square:
-      default:
         return Container(
           decoration: BoxDecoration(
             color:
                 isSelected
                     ? widget.selectedDateBackgroundColor
                     : Colors.transparent,
-            shape:
-                selectedShape == DateSelectedShape.circle
-                    ? BoxShape.circle
-                    : BoxShape.rectangle,
-            borderRadius:
-                selectedShape == DateSelectedShape.square
-                    ? BorderRadius.circular(4)
-                    : null,
+            shape: BoxShape.circle,
+          ),
+          child: Center(child: Text(dayNumber, style: textStyle)),
+        );
+      case DateSelectedShape.square:
+        return Container(
+          decoration: BoxDecoration(
+            color:
+                isSelected
+                    ? widget.selectedDateBackgroundColor
+                    : Colors.transparent,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(4),
           ),
           child: Center(child: Text(dayNumber, style: textStyle)),
         );
