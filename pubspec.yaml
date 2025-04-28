@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.20.2
   scrollable_positioned_list: ^0.3.8
   dotted_border: ^2.1.0
 
@@ -33,5 +32,9 @@ platforms:
 screenshots:
   - description: "The Scrollable Date Picker"
     path: example/images/1.png
+  - description: "Show Dots on the days"
+    path: example/images/2.png
+  - description: "Custom styled Scrollable Date Picker with dotted borders"
+    path: example/images/3.png
 
 license: MIT
