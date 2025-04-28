@@ -156,9 +156,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-## 🌟 Star this repo if you find it useful!
-
----
-
-Would you also like me to prepare a minimal **example app** code (`example/lib/main.dart`) you can publish along with this on pub.dev? 🚀  
-It will make your package even more professional! 🚀
+## 🌟 Like and Star this repo if you find it useful
