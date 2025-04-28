@@ -1,4 +1,4 @@
-import 'package:dateline/date_selector.dart.dart';
+import 'package:dateline/timeline_date_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
