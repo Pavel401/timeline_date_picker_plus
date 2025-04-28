@@ -48,7 +48,7 @@ flutter pub get
 ### 2. Import
 
 ```dart
-import 'package:timeline_date_picker/timeline_date_picker.dart';
+import 'package:timeline_date_picker_plus/timeline_date_picker_plus.dart';
 ```
 
 ---
