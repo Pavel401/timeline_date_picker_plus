@@ -32,6 +32,8 @@ class _DateSelectorDemoState extends State<DateSelectorDemo> {
   final DateTime _lastDate = DateTime.now().add(const Duration(days: 365));
   DateTime _selectedDate = DateTime.now();
 
+  bool _showMonthName = true;
+
   // Styling parameters
   bool _showScheduleDots = true;
   DateSelectedShape _selectedShape = DateSelectedShape.circle;
@@ -101,6 +103,7 @@ class _DateSelectorDemoState extends State<DateSelectorDemo> {
                 _selectedDate = date;
               });
             },
+            showMonthName: _showMonthName,
             scheduleCounts: _scheduleCounts,
             showScheduleDots: _showScheduleDots,
             selectedShape: _selectedShape,
@@ -210,6 +213,15 @@ class _DateSelectorDemoState extends State<DateSelectorDemo> {
                       },
                     ),
 
+                    SwitchListTile(
+                      title: const Text('Show Month Names'),
+                      value: _showMonthName,
+                      onChanged: (value) {
+                        setState(() {
+                          _showMonthName = value;
+                        });
+                      },
+                    ),
                     // Color configuration
                     _buildSectionTitle('Color Configuration'),
 

@@ -13,6 +13,8 @@ class DateScroller extends StatefulWidget {
   final bool showScheduleDots;
   final DateSelectedShape? selectedShape;
 
+  final bool? showMonthName;
+
   // Styling properties with sensible defaults
   final Color selectedDateBackgroundColor;
   final Color? dayNameColor;
@@ -36,8 +38,10 @@ class DateScroller extends StatefulWidget {
     required this.lastDate,
     this.selectedDate,
     required this.onDateSelected,
+
     required this.scheduleCounts,
     this.showScheduleDots = true,
+    this.showMonthName = true,
     // Default styling
     this.selectedDateBackgroundColor = Colors.deepPurple,
     this.dayNameColor,
@@ -291,45 +295,47 @@ class _DateScrollerState extends State<DateScroller> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           // Month Timeline
-          SizedBox(
-            height: 50,
-            child: ScrollablePositionedList.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: _monthsList.length,
-              itemScrollController: _monthScrollController,
-              itemPositionsListener: _monthPositionsListener,
-              itemBuilder: (context, index) {
-                DateTime month = _monthsList[index];
-                bool isCurrentMonth =
-                    month.year == _selectedDate.year &&
-                    month.month == _selectedDate.month;
+          widget.showMonthName == true
+              ? SizedBox(
+                height: 50,
+                child: ScrollablePositionedList.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _monthsList.length,
+                  itemScrollController: _monthScrollController,
+                  itemPositionsListener: _monthPositionsListener,
+                  itemBuilder: (context, index) {
+                    DateTime month = _monthsList[index];
+                    bool isCurrentMonth =
+                        month.year == _selectedDate.year &&
+                        month.month == _selectedDate.month;
 
-                // Create a nicely formatted month name with year if it's January or first month
-                String monthDisplay;
-                if (index == 0 || month.month == 1) {
-                  // Show month with year for January or first month in list
-                  monthDisplay =
-                      '${_getMonthName(month.month).toUpperCase()} ${month.year}';
-                } else {
-                  // Just show month name for other months
-                  monthDisplay = _getMonthName(month.month).toUpperCase();
-                }
+                    // Create a nicely formatted month name with year if it's January or first month
+                    String monthDisplay;
+                    if (index == 0 || month.month == 1) {
+                      // Show month with year for January or first month in list
+                      monthDisplay =
+                          '${_getMonthName(month.month).toUpperCase()} ${month.year}';
+                    } else {
+                      // Just show month name for other months
+                      monthDisplay = _getMonthName(month.month).toUpperCase();
+                    }
 
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                  child: InkWell(
-                    onTap: () => _scrollToMonth(month),
-                    child: Center(
-                      child: Text(
-                        monthDisplay,
-                        style: _getMonthTextStyle(isCurrentMonth),
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: InkWell(
+                        onTap: () => _scrollToMonth(month),
+                        child: Center(
+                          child: Text(
+                            monthDisplay,
+                            style: _getMonthTextStyle(isCurrentMonth),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
+                    );
+                  },
+                ),
+              )
+              : SizedBox(),
 
           // Day Selector (existing implementation)
           Flexible(

@@ -1,4 +1,4 @@
-# timeline_date_picker
+# timeline_date_picker_plus
 
 A beautiful and customizable **horizontal scrollable date picker** for Flutter.  
 Supports **custom styling**, **dots to represent events/schedules**, and more!
@@ -22,7 +22,7 @@ Supports **custom styling**, **dots to represent events/schedules**, and more!
 
 | Basic Picker | Schedule Dots | Custom Styling |
 |:------------:|:-------------:|:--------------:|
-| ![Basic Picker](example/images/1.png) | ![Schedule Dots](example/images/2.png) | ![Custom Styling](example/images/3.png) |
+| ![Basic Picker](https://res.cloudinary.com/dc0tfxkph/image/upload/v1745869268/GitHub/Screenshot_1745867444.png) | ![Schedule Dots](https://res.cloudinary.com/dc0tfxkph/image/upload/v1745869268/GitHub/Screenshot_1745867389.png) | ![Custom Styling](https://res.cloudinary.com/dc0tfxkph/image/upload/v1745869268/GitHub/Screenshot_1745867426.png) |
 
 ---
 
