@@ -289,100 +289,94 @@ class _DateScrollerState extends State<DateScroller> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          // Month Timeline
-          widget.showMonthName == true
-              ? SizedBox(
-                height: 50,
-                child: ScrollablePositionedList.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: _monthsList.length,
-                  itemScrollController: _monthScrollController,
-                  itemPositionsListener: _monthPositionsListener,
-                  itemBuilder: (context, index) {
-                    DateTime month = _monthsList[index];
-                    bool isCurrentMonth =
-                        month.year == _selectedDate.year &&
-                        month.month == _selectedDate.month;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min, // Use min to take only necessary space
+      children: [
+        // Month Timeline
+        widget.showMonthName == true
+            ? SizedBox(
+              height: 50,
+              child: ScrollablePositionedList.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: _monthsList.length,
+                itemScrollController: _monthScrollController,
+                itemPositionsListener: _monthPositionsListener,
+                itemBuilder: (context, index) {
+                  DateTime month = _monthsList[index];
+                  bool isCurrentMonth =
+                      month.year == _selectedDate.year &&
+                      month.month == _selectedDate.month;
 
-                    // Create a nicely formatted month name with year if it's January or first month
-                    String monthDisplay;
-                    if (index == 0 || month.month == 1) {
-                      // Show month with year for January or first month in list
-                      monthDisplay =
-                          '${_getMonthName(month.month).toUpperCase()} ${month.year}';
-                    } else {
-                      // Just show month name for other months
-                      monthDisplay = _getMonthName(month.month).toUpperCase();
-                    }
+                  String monthDisplay;
+                  if (index == 0 || month.month == 1) {
+                    monthDisplay =
+                        '${_getMonthName(month.month).toUpperCase()} ${month.year}';
+                  } else {
+                    monthDisplay = _getMonthName(month.month).toUpperCase();
+                  }
 
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                      child: InkWell(
-                        onTap: () => _scrollToMonth(month),
-                        child: Center(
-                          child: Text(
-                            monthDisplay,
-                            style: _getMonthTextStyle(isCurrentMonth),
-                          ),
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: InkWell(
+                      onTap: () => _scrollToMonth(month),
+                      child: Center(
+                        child: Text(
+                          monthDisplay,
+                          style: _getMonthTextStyle(isCurrentMonth),
                         ),
                       ),
-                    );
-                  },
-                ),
-              )
-              : SizedBox(),
+                    ),
+                  );
+                },
+              ),
+            )
+            : const SizedBox(),
 
-          // Day Selector (existing implementation)
-          Flexible(
-            fit: FlexFit.loose,
-            child: ScrollablePositionedList.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: _datesList.length,
-              itemScrollController: _itemScrollController,
-              itemPositionsListener: _itemPositionsListener,
-              itemBuilder: (context, index) {
-                DateTime date = _datesList[index];
-                bool isSunday = date.weekday == DateTime.sunday;
-                bool isSelected =
-                    _selectedDate.year == date.year &&
-                    _selectedDate.month == date.month &&
-                    _selectedDate.day == date.day;
+        // Day Selector
+        SizedBox(
+          height: 100, // Set a fixed height for the day selector
+          child: ScrollablePositionedList.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: _datesList.length,
+            itemScrollController: _itemScrollController,
+            itemPositionsListener: _itemPositionsListener,
+            itemBuilder: (context, index) {
+              DateTime date = _datesList[index];
+              bool isSunday = date.weekday == DateTime.sunday;
+              bool isSelected =
+                  _selectedDate.year == date.year &&
+                  _selectedDate.month == date.month &&
+                  _selectedDate.day == date.day;
 
-                int noOfSchedules = 0;
-                if (widget.showScheduleDots) {
-                  noOfSchedules =
-                      widget.scheduleCounts[DateTime(
-                        date.year,
-                        date.month,
-                        date.day,
-                      )] ??
-                      0;
-                }
+              int noOfSchedules = 0;
+              if (widget.showScheduleDots) {
+                noOfSchedules =
+                    widget.scheduleCounts[DateTime(
+                      date.year,
+                      date.month,
+                      date.day,
+                    )] ??
+                    0;
+              }
 
-                return _buildDayColumn(
-                  date,
-                  isSunday: isSunday,
-                  isSelected: isSelected,
-                  noOfSchedules: noOfSchedules,
-                  onTap: () {
-                    setState(() {
-                      _selectedDate = date;
-                    });
-                    widget.onDateSelected(date);
-                    // Make sure the month view is also scrolled when a date is selected
-                    _scrollToSelectedMonth();
-                  },
-                );
-              },
-            ),
+              return _buildDayColumn(
+                date,
+                isSunday: isSunday,
+                isSelected: isSelected,
+                noOfSchedules: noOfSchedules,
+                onTap: () {
+                  setState(() {
+                    _selectedDate = date;
+                  });
+                  widget.onDateSelected(date);
+                  _scrollToSelectedMonth();
+                },
+              );
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
