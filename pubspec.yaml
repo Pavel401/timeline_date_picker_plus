@@ -1,6 +1,6 @@
 name: timeline_date_picker_plus
 description: A Flutter package for a horizontal scrollable date picker with support for custom styling and dots on the days.
-version: 0.0.2
+version: 0.0.3
 
 homepage: https://github.com/Pavel401/scrollable_date_picker
 

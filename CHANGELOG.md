@@ -12,3 +12,9 @@
 ## 0.0.2
 
 - Added `showMonthName` to show and hide Month TimeLine
+
+
+## 0.0.3
+
+- Fixed bug (No Extra Space below the Widget)
+- Added one more example code 
